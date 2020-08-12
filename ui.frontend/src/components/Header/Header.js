@@ -4,6 +4,7 @@ import backIcon from '../../media/icon-back.svg';
 import {MapTo} from '@adobe/cq-react-editable-components';
 import { withRouter } from "react-router";
 import {Link} from "react-router-dom";
+import Navigation from '../Navigation/Navigation';
 
 require('./Header.scss');
 
@@ -62,12 +63,25 @@ export default class Header extends Component {
 
     get homeLink() {
         //TODO: update to be dynamic
-        return "/content/wknd-spa-react/us/en/home.html";
+        // return "/content/wknd-spa-react/us/en/home.html";
+
+        //expect a single root defined as part of the navigation
+    if(!this.props.items || this.props.items.length !== 1) {
+        return null;
     }
 
+    return this.props.items[0].url;
+
+    }
+
+    // get navigation() {
+    //     //TODO: update to be dynamic
+    //     return <div class="Navigation">Navigation</div>;
+    // }
+
     get navigation() {
-        //TODO: update to be dynamic
-        return <div class="Navigation">Navigation</div>;
+        //pass all the props to Navigation component
+        return <Navigation {...this.props} />;
     }
 
     get logo() {
